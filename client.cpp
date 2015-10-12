@@ -1,12 +1,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <cstdio>
+#include <cmath>
 #include <winsock.h>
+
+
 using namespace std;
 
 //server IP and port
 //convert IP for inet_addr()?
-#define DEST_DNS "cs5700f15.ccs.neu.edu"
+#define DEST_DNS "cs5700.ccs.neu.edu"
 #define DEST_PORT 27993
 #define BACKLOG 10
 //max transfer size is 256 bytes
@@ -44,7 +48,7 @@ int main(int argc, char *argv[]){
 
 	//connect to the server
 	//connect will figure out our local port # and the server will get that info
-	
+
 	connect(sockfd, (struct sockaddr *)&dest_addr, sizeof(struct sockaddr));
 
 	//send HELLO message
@@ -64,11 +68,12 @@ int main(int argc, char *argv[]){
 			communicating = false;
 		}
 		else {
+			cout << recvstring << "\n";
 			//get arguments from string
-			domath();
+			// domath();
 		}
 	}
-	
+
 
 	//when done...
 	closesocket(sockfd);
@@ -105,4 +110,3 @@ int domath(int arg1, char* op, int arg2) {
 //listen(sockfd, BACKLOG);
 //sin_size = sizeof(struct sockaddr_in);
 //newfd = accept(sockfd, (struct sockaddr *)&dest_addr, &sin_size);
-
